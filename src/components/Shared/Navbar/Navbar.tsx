@@ -1,4 +1,5 @@
-import { Box, Container, Stack, Typography } from "@mui/material";
+import { Box, Button, Container, Stack, Typography } from "@mui/material";
+import Link from "next/link";
 
 const Navbar = () => {
   return (
@@ -7,10 +8,12 @@ const Navbar = () => {
         py={2}
         direction="row"
         justifyContent="space-between"
+        alignItems="center"
       >
         <Typography
-          variant="h5"
-          component="h1"
+          variant="h4"
+          component={Link}
+          href="/"
           fontWeight={600}
         >
           <Box
@@ -21,6 +24,28 @@ const Navbar = () => {
           </Box>
           ealth Care
         </Typography>
+        <Stack
+          direction="row"
+          gap={4}
+          justifyContent="space-between"
+        >
+          <Typography
+            component={Link}
+            href="/consultation"
+          >
+            Consultation
+          </Typography>
+          <Typography>Health Plans</Typography>
+          <Typography>Medicine</Typography>
+          <Typography>Diagnostics</Typography>
+          <Typography>NGOs</Typography>
+        </Stack>
+        <Button
+          component={Link}
+          href="/login"
+        >
+          Login
+        </Button>
       </Stack>
     </Container>
   );
