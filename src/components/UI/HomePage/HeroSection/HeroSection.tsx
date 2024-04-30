@@ -23,6 +23,7 @@ const HeroSection = () => {
             width: "700px",
             top: "-90px",
             left: "-120px",
+            zIndex: "-1",
           }}
         >
           <Image
