@@ -4,11 +4,12 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import Image from "next/image";
 import assets from "@/assets";
 import Link from "next/link";
+import { userLogin } from "@/services/actions/userLogin";
 
-interface IPatientLoginFormData {
+export type FormValues = {
   email: string;
   password: string;
-}
+};
 
 const LoginPage = () => {
   const {
@@ -16,11 +17,13 @@ const LoginPage = () => {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<IPatientLoginFormData>();
+  } = useForm<FormValues>();
 
-  const onSubmit: SubmitHandler<IPatientLoginFormData> = async (values) => {
-    console.log(values);
+  const onSubmit: SubmitHandler<FormValues> = async (values) => {
+    // console.log(values);
     try {
+      const res = await userLogin(values);
+      console.log(res);
     } catch (error: any) {
       console.error(error.message);
     }
