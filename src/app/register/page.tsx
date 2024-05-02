@@ -7,6 +7,9 @@ import assets from "@/assets";
 import Link from "next/link";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { modifyPayload } from "@/utils/modifyPayload";
+import { registerPatient } from "@/services/actions/registerPatient";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 interface IPatientData {
   name: string;
@@ -19,15 +22,26 @@ interface IPatientRegisterFormData {
   patient: IPatientData;
 }
 const RegisterPage = () => {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
   } = useForm<IPatientRegisterFormData>();
-  const onSubmit: SubmitHandler<IPatientRegisterFormData> = (values) => {
+  const onSubmit: SubmitHandler<IPatientRegisterFormData> = async (values) => {
     const data = modifyPayload(values);
-    console.log(data);
+    // console.log(data);
+    try {
+      const res = await registerPatient(data);
+      // console.log(res);
+      if (res?.data?.id) {
+        toast.success(res?.message || "Patient registered successfully");
+        router.push("/login");
+      }
+    } catch (error: any) {
+      console.error(error.message);
+    }
   };
 
   return (
@@ -78,6 +92,11 @@ const RegisterPage = () => {
                 container
                 spacing={2}
                 my={1}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
               >
                 <Grid
                   item
