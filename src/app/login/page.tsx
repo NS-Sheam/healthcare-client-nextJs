@@ -1,9 +1,30 @@
+"use client";
 import { Box, Button, Container, Grid, Stack, TextField, Typography } from "@mui/material";
 import { useForm, SubmitHandler } from "react-hook-form";
 import Image from "next/image";
 import assets from "@/assets";
 import Link from "next/link";
+
+interface IPatientLoginFormData {
+  email: string;
+  password: string;
+}
+
 const LoginPage = () => {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<IPatientLoginFormData>();
+
+  const onSubmit: SubmitHandler<IPatientLoginFormData> = async (values) => {
+    console.log(values);
+    try {
+    } catch (error: any) {
+      console.error(error.message);
+    }
+  };
   return (
     <Container>
       <Stack
@@ -47,7 +68,7 @@ const LoginPage = () => {
             </Box>
           </Stack>
           <Box>
-            <form>
+            <form onSubmit={handleSubmit(onSubmit)}>
               <Grid
                 container
                 spacing={2}
@@ -63,6 +84,7 @@ const LoginPage = () => {
                     variant="outlined"
                     size="small"
                     fullWidth
+                    {...register("email")}
                   />
                 </Grid>
                 <Grid
@@ -75,6 +97,7 @@ const LoginPage = () => {
                     variant="outlined"
                     size="small"
                     fullWidth
+                    {...register("password")}
                   />
                 </Grid>
               </Grid>
@@ -92,6 +115,7 @@ const LoginPage = () => {
                 sx={{
                   margin: "10px 0",
                 }}
+                type="submit"
               >
                 Login
               </Button>
