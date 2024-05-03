@@ -6,6 +6,8 @@ import assets from "@/assets";
 import Link from "next/link";
 import { userLogin } from "@/services/actions/userLogin";
 import { storeUserInfo } from "@/services/auth.services";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 export type FormValues = {
   email: string;
@@ -13,6 +15,7 @@ export type FormValues = {
 };
 
 const LoginPage = () => {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -25,7 +28,9 @@ const LoginPage = () => {
     try {
       const res = await userLogin(values);
       if (res?.data?.accessToken) {
+        toast.success(res?.message || "Login Successful");
         storeUserInfo({ accessToken: res?.data?.accessToken });
+        router.push("/");
       }
     } catch (error: any) {
       console.error(error.message);
