@@ -55,7 +55,8 @@ const Footer = () => {
             height={30}
           />
         </Stack>
-        <div className="border-b-[1px] border-dashed"></div>
+        {/* <div className="border-b-[1px] border-dashed"></div> */}
+        <Box sx={{ borderBottom: "1px dashed lightgray" }}></Box>
         <Stack
           direction="row"
           gap={2}
