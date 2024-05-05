@@ -6,7 +6,7 @@ import "./globals.css";
 import Providers from "@/lib/Providers/Providers";
 import { Toaster } from "sonner";
 
-const inter = Inter({ subsets: ["latin"] });
+// const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -17,7 +17,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <Providers>
       <html lang="en">
-        <body className={inter.className}>
+        <body>
           <AppRouterCacheProvider>
             <>
               <Toaster position="top-center" />

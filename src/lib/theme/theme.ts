@@ -30,6 +30,7 @@ export const theme = createTheme({
     body1: {
       color: "#0B1134CC",
     },
+    fontFamily: ["Roboto Condensed", "sans-serif"].join(","),
   },
 });
 
