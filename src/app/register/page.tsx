@@ -99,7 +99,6 @@ const RegisterPage = () => {
                     name="patient.name"
                     label="Name"
                     fullWidth
-                    required
                   />
                 </Grid>
                 <Grid
@@ -111,7 +110,6 @@ const RegisterPage = () => {
                     label="Email"
                     type="email"
                     fullWidth
-                    required
                   />
                 </Grid>
                 <Grid
@@ -123,7 +121,6 @@ const RegisterPage = () => {
                     label="Password"
                     type="password"
                     fullWidth
-                    required
                   />
                 </Grid>
                 <Grid
@@ -135,7 +132,6 @@ const RegisterPage = () => {
                     label="Contact Number"
                     type="tel"
                     fullWidth
-                    required
                   />
                 </Grid>
                 <Grid
@@ -147,7 +143,6 @@ const RegisterPage = () => {
                     label="Address"
                     type="text"
                     fullWidth
-                    required
                   />
                 </Grid>
               </Grid>

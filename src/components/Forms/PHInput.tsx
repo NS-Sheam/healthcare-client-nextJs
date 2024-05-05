@@ -21,7 +21,7 @@ const PHInput = ({ name, label, type = "text", size = "small", fullWidth, sx, pl
       rules={{
         required: true,
       }}
-      render={({ field }) => (
+      render={({ field, fieldState: { error } }) => (
         <TextField
           sx={{ ...sx }}
           label={label}
@@ -32,6 +32,8 @@ const PHInput = ({ name, label, type = "text", size = "small", fullWidth, sx, pl
           fullWidth={fullWidth}
           placeholder={placeholder || label}
           required={required || false}
+          error={!!error?.message}
+          helperText={error?.message}
         />
       )}
     />

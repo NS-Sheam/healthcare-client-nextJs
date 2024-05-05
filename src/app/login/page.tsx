@@ -84,6 +84,10 @@ const LoginPage = () => {
             <PHForm
               onSubmit={handleLogin}
               resolver={zodResolver(validationSchema)}
+              defaultValues={{
+                email: "",
+                password: "",
+              }}
             >
               <Grid
                 container
@@ -99,7 +103,6 @@ const LoginPage = () => {
                     label="Email"
                     type="email"
                     fullWidth
-                    required
                   />
                 </Grid>
                 <Grid
@@ -111,7 +114,6 @@ const LoginPage = () => {
                     label="Password"
                     type="password"
                     fullWidth
-                    required
                   />
                 </Grid>
               </Grid>
