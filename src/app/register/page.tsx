@@ -16,6 +16,7 @@ import PHForm from "@/components/Forms/PHForm";
 import PHInput from "@/components/Forms/PHInput";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useState } from "react";
 
 const patientValidatonSchema = z.object({
   name: z.string({
@@ -47,6 +48,7 @@ const registerValidatonSchema = z.object({
 
 const RegisterPage = () => {
   const router = useRouter();
+  const [error, setError] = useState("");
 
   const handleRegister = async (values: FieldValues) => {
     const data = modifyPayload(values);
@@ -60,7 +62,11 @@ const RegisterPage = () => {
         if (result?.data?.accessToken) {
           storeUserInfo({ accessToken: result?.data?.accessToken });
           router.push("/");
+        } else {
+          setError(result?.message || "Login failed");
         }
+      } else {
+        setError(res?.message || "Patient registration failed");
       }
     } catch (error: any) {
       console.error(error.message);
@@ -109,6 +115,22 @@ const RegisterPage = () => {
               </Typography>
             </Box>
           </Stack>
+          {error && (
+            <Box>
+              <Typography
+                component="p"
+                sx={{
+                  backgroundColor: "error.light",
+                  color: "#ffffff",
+                  padding: "1px",
+                  borderRadius: "2px",
+                  marginTop: "5px",
+                }}
+              >
+                {error}
+              </Typography>
+            </Box>
+          )}
           <Box>
             <PHForm
               onSubmit={handleRegister}
