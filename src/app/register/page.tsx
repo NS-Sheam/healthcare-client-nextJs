@@ -61,7 +61,7 @@ const RegisterPage = () => {
         const result = await userLogin({ password: values.password, email: values.patient.email });
         if (result?.data?.accessToken) {
           storeUserInfo({ accessToken: result?.data?.accessToken });
-          router.push("/");
+          router.push("/dashboard");
         } else {
           setError(result?.message || "Login failed");
         }
