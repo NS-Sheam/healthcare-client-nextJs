@@ -13,7 +13,7 @@ import PHInput from "@/components/Forms/PHInput";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-export const validationSchema = z.object({
+const loginValidationSchema = z.object({
   email: z
     .string({
       required_error: "Email is required",
@@ -83,7 +83,7 @@ const LoginPage = () => {
           <Box>
             <PHForm
               onSubmit={handleLogin}
-              resolver={zodResolver(validationSchema)}
+              resolver={zodResolver(loginValidationSchema)}
               defaultValues={{
                 email: "",
                 password: "",
