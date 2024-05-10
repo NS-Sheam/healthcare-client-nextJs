@@ -2,18 +2,32 @@ import PHFileUploader from "@/components/Forms/PHFileUploader";
 import PHForm from "@/components/Forms/PHForm";
 import PHInput from "@/components/Forms/PHInput";
 import PHModal from "@/components/Shared/PHModal/PHModal";
-import { Button, Grid, TextField } from "@mui/material";
+import { useCreateSpecialtyMutation } from "@/redux/api/specialtiesApi";
+import { modifyPayload } from "@/utils/modifyPayload";
+import { Try } from "@mui/icons-material";
+import { Button, Grid } from "@mui/material";
 import React from "react";
 import { FieldValues } from "react-hook-form";
+import { toast } from "sonner";
 
-type TSpecialistModalProps = {
+type TSpecialtyModalProps = {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const SpecialistModal = ({ open, setOpen }: TSpecialistModalProps) => {
-  const handleFFormSubmit = (values: FieldValues) => {
-    // handle form submit
+const SpecialtyModal = ({ open, setOpen }: TSpecialtyModalProps) => {
+  const [createSpecialty] = useCreateSpecialtyMutation();
+  const handleFFormSubmit = async (values: FieldValues) => {
+    const data = modifyPayload(values);
+    try {
+      const res = await createSpecialty(data).unwrap();
+      if (res?.id) {
+        toast.success("Specialty created successfully");
+        setOpen(false);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -40,7 +54,10 @@ const SpecialistModal = ({ open, setOpen }: TSpecialistModalProps) => {
             item
             md={6}
           >
-            <PHFileUploader />
+            <PHFileUploader
+              name="file"
+              label="Upload File"
+            />
           </Grid>
         </Grid>
         <Button
@@ -56,4 +73,4 @@ const SpecialistModal = ({ open, setOpen }: TSpecialistModalProps) => {
   );
 };
 
-export default SpecialistModal;
+export default SpecialtyModal;
