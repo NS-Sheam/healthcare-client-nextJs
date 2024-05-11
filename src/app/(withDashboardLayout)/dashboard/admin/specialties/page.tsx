@@ -85,6 +85,7 @@ const SpecialtiesPage = () => {
           <DataGrid
             rows={data}
             columns={columns}
+            hideFooter
           />
         </Box>
       ) : (
