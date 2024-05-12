@@ -14,6 +14,7 @@ import { Avatar, Badge, Stack } from "@mui/material";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import { useGetSingleUserQuery } from "@/redux/api/userApi";
 import Sidebar from "../Sidebar/Sidebar";
+import AccountMenu from "../AccountMenu.tsx/AccountMenu";
 
 const drawerWidth = 240;
 
@@ -105,6 +106,7 @@ export default function DashboardDrawer({ children }: { children: React.ReactNod
                 alt={data?.name}
                 src={data?.profilePhoto}
               />
+              <AccountMenu />
             </Stack>
           </Box>
         </Toolbar>
