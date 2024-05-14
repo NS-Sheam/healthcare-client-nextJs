@@ -13,11 +13,13 @@ const scheduleApi = baseApi.injectEndpoints({
       invalidatesTags: [tagTypes.schedule],
     }),
     getAllSchedules: build.query({
-      query: (args: Record<string, any>) => ({
-        url: "/schedule",
-        method: "GET",
-        params: args,
-      }),
+      query: (args: Record<string, any>) => {
+        return {
+          url: "/schedule",
+          method: "GET",
+          params: args,
+        };
+      },
       transformResponse: (response: [], meta: IMeta) => {
         return {
           schedules: response,

@@ -14,6 +14,7 @@ import { toast } from "sonner";
 const SchedulesPage = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [allSchedule, setAllSchedule] = useState<any>([]);
+
   const [deleteSchedule] = useDeleteScheduleMutation();
   const { data, isLoading } = useGetAllSchedulesQuery({});
 

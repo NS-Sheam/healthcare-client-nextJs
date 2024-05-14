@@ -23,7 +23,6 @@ const ScheduleModal = ({ open, setOpen }: TProps) => {
 
     try {
       const res = await createSchedule(values);
-      console.log(res);
 
       if ("data" in res && res.data.length) {
         toast.success("Schedule created successfully");
