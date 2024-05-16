@@ -1,12 +1,15 @@
 "use client";
 
 import { useGetMYProfileQuery, useUpdateMYProfileMutation } from "@/redux/api/myProfile";
-import { Box, Container, Stack, Typography, styled } from "@mui/material";
+import { Box, Button, Container, Stack, Typography, styled } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
 import Image from "next/image";
 import DoctorInformation from "./components/DoctorInformation";
 import AutoFileUploader from "@/components/Forms/AutoFileUploader";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import ProfileUpdateModal from "./components/ProfileUpdateModal";
+import { useState } from "react";
+import ModeEditIcon from "@mui/icons-material/ModeEdit";
 const StyledInformationBox = styled(Box)(({ theme }) => ({
   background: "#f4f7fe",
   borderRadius: theme.spacing(1),
@@ -18,6 +21,7 @@ const StyledInformationBox = styled(Box)(({ theme }) => ({
 }));
 
 const Profile = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const { data, isLoading } = useGetMYProfileQuery(undefined);
   const [updateMyProfile, { isLoading: updating }] = useUpdateMYProfileMutation();
   // console.log(data);
@@ -38,50 +42,65 @@ const Profile = () => {
   }
 
   return (
-    <Container>
-      <Grid
-        container
-        spacing={2}
-      >
+    <>
+      <ProfileUpdateModal
+        open={isModalOpen}
+        setOpen={setIsModalOpen}
+        id={data?.id}
+      />
+      <Container>
         <Grid
-          xs={12}
-          md={4}
+          container
+          spacing={2}
         >
-          <Box
-            sx={{
-              height: 300,
-              width: "100%",
-              overflow: "hidden",
-              borderRadius: 1,
-            }}
+          <Grid
+            xs={12}
+            md={4}
           >
-            <Image
-              height={300}
-              width={400}
-              src={data?.profilePhoto}
-              alt="profile"
-            />
-          </Box>
-          {updating ? (
-            <p>Updating...</p>
-          ) : (
-            <AutoFileUploader
-              name="file"
-              label="Upload Profile Photo"
-              icon={<CloudUploadIcon />}
-              onFileUpload={fileUploadHandler}
-              variant="text"
-            />
-          )}
+            <Box
+              sx={{
+                height: 300,
+                width: "100%",
+                overflow: "hidden",
+                borderRadius: 1,
+              }}
+            >
+              <Image
+                height={300}
+                width={400}
+                src={data?.profilePhoto}
+                alt="profile"
+              />
+            </Box>
+            {updating ? (
+              <p>Updating...</p>
+            ) : (
+              <AutoFileUploader
+                name="file"
+                label="Upload Profile Photo"
+                icon={<CloudUploadIcon />}
+                onFileUpload={fileUploadHandler}
+                variant="text"
+              />
+            )}
+            <Button
+              variant="contained"
+              onClick={() => setIsModalOpen(true)}
+              fullWidth
+              endIcon={<ModeEditIcon />}
+            >
+              Update Profile
+            </Button>
+          </Grid>
+          <Grid
+            xs={12}
+            md={8}
+          >
+            <DoctorInformation data={data} />
+          </Grid>
         </Grid>
-        <Grid
-          xs={12}
-          md={8}
-        >
-          <DoctorInformation data={data} />
-        </Grid>
-      </Grid>
-    </Container>
+      </Container>
+    </>
   );
 };
 
