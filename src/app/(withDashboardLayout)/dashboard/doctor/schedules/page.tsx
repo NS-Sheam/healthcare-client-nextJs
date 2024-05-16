@@ -24,8 +24,8 @@ const DoctorSchedulesPage = () => {
         sl: index + 1,
         id: schedule?.doctorId,
         startDate: dateFormatter(schedule?.schedule?.startDate),
-        startTime: dayjs(schedule?.startDate).format("hh:mm a"),
-        endTime: dayjs(schedule?.endDate).format("hh:mm a"),
+        startTime: dayjs(schedule?.schedule?.startDate).format("hh:mm a"),
+        endTime: dayjs(schedule?.schedule?.endDate).format("hh:mm a"),
       };
     });
     setAllSchedule(updateData);
