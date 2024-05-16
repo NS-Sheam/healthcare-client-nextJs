@@ -15,6 +15,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import MultipleSelectChip from "./MultipleSelectChip";
 import { useGetDoctorQuery, useUpdateDoctorMutation } from "@/redux/api/doctorApi";
+import { toast } from "sonner";
 
 type TProps = {
   open: boolean;
@@ -88,6 +89,9 @@ const ProfileUpdateModal = ({ open, setOpen, id }: TProps) => {
     try {
       updateDoctor({ body: updatedValues, id });
       await refetch();
+      if (isSuccess) {
+        toast.success("Profile updated successfully");
+      }
       setOpen(false);
     } catch (error) {
       console.log(error);
