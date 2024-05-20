@@ -48,10 +48,14 @@ const Profile = () => {
         setOpen={setIsModalOpen}
         id={data?.id}
       />
-      <Container>
+      <Container
+        sx={{
+          mt: 4,
+        }}
+      >
         <Grid
           container
-          spacing={2}
+          spacing={4}
         >
           <Grid
             xs={12}
@@ -72,17 +76,19 @@ const Profile = () => {
                 alt="profile"
               />
             </Box>
-            {updating ? (
-              <p>Updating...</p>
-            ) : (
-              <AutoFileUploader
-                name="file"
-                label="Upload Profile Photo"
-                icon={<CloudUploadIcon />}
-                onFileUpload={fileUploadHandler}
-                variant="text"
-              />
-            )}
+            <Box my={3}>
+              {updating ? (
+                <p>Updating...</p>
+              ) : (
+                <AutoFileUploader
+                  name="file"
+                  label="Upload Profile Photo"
+                  icon={<CloudUploadIcon />}
+                  onFileUpload={fileUploadHandler}
+                  variant="text"
+                />
+              )}
+            </Box>
             <Button
               variant="contained"
               onClick={() => setIsModalOpen(true)}
